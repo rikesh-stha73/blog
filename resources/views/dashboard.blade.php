@@ -33,6 +33,15 @@
                     <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-body">
+                                <a href="{{ route('categories.index') }}" class="btn btn-primary btn-lg btn-block">
+                                    <i class="fas fa-file-list"></i> Categories
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
                                 <a href="{{ route('post.index') }}" class="btn btn-primary btn-lg btn-block">
                                     <i class="fas fa-file-alt"></i> Posts
                                 </a>

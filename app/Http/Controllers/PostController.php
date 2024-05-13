@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
@@ -20,8 +21,18 @@ class PostController extends Controller
         try{
             $data['user'] = Auth::user();
 
-            $data['page_url'] = 'posts';
-            $posts = Post::all();
+            // Fetch all categories
+        $data['categoryList'] = Category::all();
+
+        // Fetch posts based on selected category if a category is selected
+        $postsQuery = Post::query();
+            if ($request->has('category')) {
+                $categoryId = $request->input('category');
+                if ($categoryId != '') {
+                    $postsQuery->where('category_id', $categoryId);
+                }
+            }
+            $posts = $postsQuery->get();
 
             // Calculate the time difference for each post
             foreach ($posts as $post) {
@@ -32,6 +43,7 @@ class PostController extends Controller
         return view('posts.index', $data);
         }
         catch(\Exception $e){
+            dd($e);
             Session::flash('server_error', ('Technical error has occured'));
             return back();
         }
@@ -39,8 +51,9 @@ class PostController extends Controller
     }
 
     public function create(){
+        $data['categoryList'] = Category::all();
         try{
-            return view('posts.add');
+            return view('posts.add',$data);
         }catch(\Exception $e){
             Session::flash('server_error', ('Technical error has occured'));
             return back();
@@ -65,6 +78,7 @@ class PostController extends Controller
             $post->title = $request->title;
             $post->content = $request->content;
             $post->image = $imagePath;
+            $post->category_id = $request->category_id; 
             $post->save();
         } else {
             // Create a new post instance without an image
@@ -72,6 +86,7 @@ class PostController extends Controller
             $post->user_id = auth()->user()->id;
             $post->title = $request->title;
             $post->content = $request->content;
+            $post->category_id = $request->category_id; 
             $post->save();
         }
 

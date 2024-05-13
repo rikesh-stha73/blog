@@ -37,7 +37,10 @@ Route::get('/news/add', [NewsController::class,'create'])->name('news.create');
 Route::post('/news/add', [NewsController::class,'store'])->name('news.store');
 Route::get('/news/{news}', [NewsController::class,'show'])->name('news.show');
 
-Route::resource('/categories', CategoryController::class);
+Route::get('/categories', [CategoryController::class,'index'])->name('categories.index');
+Route::get('/categories/add', [CategoryController::class,'create'])->name('categories.create');
+Route::post('/categories/add', [CategoryController::class,'store'])->name('categories.store');
+
 
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');

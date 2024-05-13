@@ -1,0 +1,35 @@
+body {
+    /* Set background image */
+    background-image: url('{{ asset("image/bgmystic.jpg") }}');
+    /* Set background size to cover entire viewport */
+    background-size: cover;
+    /* Center the background image */
+    background-position: center;
+    /* Ensure the background image covers the entire screen */
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+.transparent-glass {
+    background: rgba(255, 255, 255, 0); /* Adjust the opacity as needed */
+    border: none;
+    backdrop-filter: blur(10px); /* Apply a blur effect */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Box shadow for the glassy effect */
+}
+
+.transparent-glass .card-header {
+    background: rgba(255, 255, 255, 0.5); /* Adjust the opacity as needed */
+}
+.transparent-navbar {
+    background: rgba(255, 255, 255, 0.5); /* Adjust the opacity as needed */
+    backdrop-filter: blur(10px); /* Apply a blur effect */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Add a subtle border */
+}
+
+.transparent-navbar .navbar-nav .nav-link {
+    color: black; /* Adjust the link color */
+}
+
+.transparent-navbar .navbar-nav .nav-link:hover {
+    color: rgba(255, 255, 255, 1); /* Adjust the link color on hover */
+}
